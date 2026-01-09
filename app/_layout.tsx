@@ -1,13 +1,29 @@
-import { Stack } from "expo-router";
-import "../global.css"
+
+import { Stack } from "expo-router"
+import { StatusBar } from "expo-status-bar"
+import { QueueProvider } from "../context/QueueContext"
+import YourTurnScreen from "./(tab)/your-turn"
+
 
 export default function RootLayout() {
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index" />
-      <Stack.Screen name="queue" />
-      <Stack.Screen name="admin" />
-      <Stack.Screen name="settings" />
-    </Stack>
-  );
+    <QueueProvider>
+      <StatusBar style="dark" />
+      <YourTurnScreen />
+      <Stack>
+        <Stack.Screen
+          name="(tab)"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="admin"
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack>
+    </QueueProvider>
+  )
 }

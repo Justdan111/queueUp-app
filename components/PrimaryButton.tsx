@@ -1,21 +1,43 @@
-import { TouchableOpacity, Text } from 'react-native'
-import React from 'react'
+import { Pressable, Text, type ViewStyle, type TextStyle } from "react-native"
+import { COLORS } from "@/constants/color"
 
-type Props = {
-  title: string;
-  onPress: () => void;
-} 
+interface PrimaryButtonProps {
+  title: string
+  onPress: () => void
+  style?: ViewStyle
+  textStyle?: TextStyle
+  variant?: "primary" | "danger" | "secondary"
+  disabled?: boolean
+}
 
-export default function PrimaryButton({ title, onPress }: Props) {
+export function PrimaryButton({
+  title,
+  onPress,
+  style,
+  textStyle,
+  variant = "primary",
+  disabled = false,
+}: PrimaryButtonProps) {
+  const backgroundColor = 
+    variant === "danger" ? COLORS.danger : 
+    variant === "secondary" ? "#f5f5f5" : 
+    COLORS.primary
+  
+  const textColor = variant === "secondary" ? COLORS.dark : COLORS.lighter
+  
   return (
-    <TouchableOpacity 
-    onPress={onPress}
-    className="bg-blue-600 py-3.5 rounded-xl items-center mb-8"
-    activeOpacity={0.8}
+    <Pressable
+      className={`py-3.5 px-4 rounded-xl items-center justify-center ${disabled ? 'opacity-60' : 'opacity-100'}`}
+      style={[{ backgroundColor }, style]}
+      onPress={onPress}
+      disabled={disabled}
     >
-      <Text className="text-white text-base font-semibold">
+      <Text 
+        className="text-base font-semibold"
+        style={[{ color: textColor }, textStyle]}
+      >
         {title}
-        </Text>
-    </TouchableOpacity>
+      </Text>
+    </Pressable>
   )
 }

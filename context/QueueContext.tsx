@@ -1,4 +1,3 @@
-"use client"
 
 import { createContext, useState, useContext, type ReactNode } from "react"
 import AsyncStorage from "@react-native-async-storage/async-storage"

@@ -1,11 +1,12 @@
 
-import { View, Text, ScrollView, Pressable, Animated, FlatList } from "react-native"
+import { View, Text, Pressable, Animated, FlatList } from "react-native"
 import { useRef, useEffect } from "react"
 import { useRouter } from "expo-router"
 import { useQueue } from "../../context/QueueContext"
 import { COLORS } from "../../constants/color"
 import { AdminActionButton } from "../../components/AdminActionButton"
 import { SafeAreaView } from "react-native-safe-area-context"
+import Ionicons from "@expo/vector-icons/build/Ionicons"
 
 export default function AdminControlScreen() {
   const { adminData, callNext, skipCurrent, endRemove, adminLogout, isAdminLoggedIn } = useQueue()
@@ -82,12 +83,7 @@ export default function AdminControlScreen() {
               Queue Admin
             </Text>
           </View>
-          <Pressable 
-            className="w-10 h-10 rounded-full bg-blue-100 justify-center items-center"
-            onPress={handleLogout}
-          >
-            <Text className="text-xl">⚙️</Text>
-          </Pressable>
+          <Ionicons name="settings" size={24} color={COLORS.gray} />
         </View>
 
         {/* Blue Top Bar */}
@@ -214,6 +210,9 @@ export default function AdminControlScreen() {
                 className="flex-row justify-between items-center px-3 py-3 rounded-xl mb-2"
                 style={{ backgroundColor: COLORS.lighter }}
               >
+                <View className="flex-row items-center gap-3 mr-2 bg-gray-200 px-2 py-1.5 rounded-lg">
+                <Ionicons name="person" size={16} color={COLORS.gray} />
+                </View>
                 <View className="flex-1">
                   <Text 
                     className="text-base font-bold mb-0.5"
@@ -253,39 +252,8 @@ export default function AdminControlScreen() {
           />
         </View>
 
-        {/* Bottom Navigation */}
-        <View 
-          className="flex-row justify-around items-center border-t border-gray-200 py-3 absolute bottom-0 left-0 right-0"
-          style={{ backgroundColor: COLORS.lighter }}
-        >
-          <Pressable className="items-center py-2">
-            <Text className="text-2xl mb-1">📋</Text>
-            <Text 
-              className="text-xs font-semibold"
-              style={{ color: COLORS.primary }}
-            >
-              Queue
-            </Text>
-          </Pressable>
-          <Pressable className="items-center py-2">
-            <Text className="text-2xl mb-1">⏱️</Text>
-            <Text 
-              className="text-xs font-semibold"
-              style={{ color: COLORS.primary }}
-            >
-              History
-            </Text>
-          </Pressable>
-          <Pressable className="items-center py-2" onPress={handleLogout}>
-            <Text className="text-2xl mb-1">🚪</Text>
-            <Text 
-              className="text-xs font-semibold"
-              style={{ color: COLORS.primary }}
-            >
-              Log Out
-            </Text>
-          </Pressable>
-        </View>
+       
+        
       </Animated.View>
     </SafeAreaView>
   )

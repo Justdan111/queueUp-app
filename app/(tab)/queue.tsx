@@ -1,6 +1,6 @@
 "use client"
 
-import { View, Text, ScrollView, Pressable, Animated } from "react-native"
+import { View, Text, Pressable, Animated } from "react-native"
 import { useRef, useEffect } from "react"
 import Svg, { Circle } from "react-native-svg"
 import { useQueue } from "../../context/QueueContext"

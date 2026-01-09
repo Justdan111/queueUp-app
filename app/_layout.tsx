@@ -3,6 +3,7 @@ import { Stack } from "expo-router"
 import { StatusBar } from "expo-status-bar"
 import { QueueProvider } from "../context/QueueContext"
 import YourTurnScreen from "./(tab)/your-turn"
+import "../global.css";
 
 
 export default function RootLayout() {
@@ -15,6 +16,7 @@ export default function RootLayout() {
           name="(tab)"
           options={{
             headerShown: false,
+            animation: "slide_from_right",
           }}
         />
         <Stack.Screen

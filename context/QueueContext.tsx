@@ -25,6 +25,8 @@ interface QueueContextType {
   userTicket: QueueUser | null
   joinQueue: (name: string, estimatedWait: number) => Promise<void>
   leaveQueue: () => Promise<void>
+  ticketCalled: boolean
+  setTicketCalled: (called: boolean) => void
 
   // Admin side
   adminData: AdminUser | null
@@ -48,6 +50,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
   const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(false)
   const [clinicName] = useState("Dr. Smith's Dental Clinic")
   const [estimatedWait] = useState(15)
+  const [ticketCalled, setTicketCalled] = useState(false)
 
   const joinQueue = async (name: string, estimatedWait: number) => {
     const ticketNumber = `A-${Math.floor(Math.random() * 1000)
@@ -106,6 +109,7 @@ export function QueueProvider({ children }: { children: ReactNode }) {
         nextTickets: adminData.nextTickets.slice(1),
         peopleWaiting: Math.max(0, adminData.peopleWaiting - 1),
       })
+      setTicketCalled(true)
     }
   }
 
@@ -141,6 +145,8 @@ export function QueueProvider({ children }: { children: ReactNode }) {
         userTicket,
         joinQueue,
         leaveQueue,
+        ticketCalled,
+        setTicketCalled,
         adminData,
         isAdminLoggedIn,
         adminLogin,

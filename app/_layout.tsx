@@ -1,16 +1,19 @@
 
 import { Stack } from "expo-router"
 import { StatusBar } from "expo-status-bar"
-import { QueueProvider } from "../context/QueueContext"
+import { QueueProvider, useQueue } from "../context/QueueContext"
 import YourTurnScreen from "./(tab)/your-turn"
-import "../global.css";
+import "../global.css"
 
+function RootLayoutContent() {
+  const { ticketCalled } = useQueue()
 
-export default function RootLayout() {
   return (
-    <QueueProvider>
+    <>
       <StatusBar style="dark" />
-      <YourTurnScreen />
+      {/* Your Turn Modal - Only shown when ticketCalled is true */}
+      {ticketCalled && <YourTurnScreen />}
+      {/* Main Navigation Stack */}
       <Stack>
         <Stack.Screen
           name="(tab)"
@@ -26,6 +29,14 @@ export default function RootLayout() {
           }}
         />
       </Stack>
+    </>
+  )
+}
+
+export default function RootLayout() {
+  return (
+    <QueueProvider>
+      <RootLayoutContent />
     </QueueProvider>
   )
 }

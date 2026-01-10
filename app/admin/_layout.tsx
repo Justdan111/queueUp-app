@@ -43,25 +43,25 @@ export default function AdminLayout() {
         }}
       />
       <Tabs.Screen
+        name="logout"
         options={{
           title: "Logout",
+          href: null,
           tabBarIcon: ({ color, size }) => <Ionicons name="log-out" size={size} color={color} />,
           tabBarButton: (props) => (
             <Pressable
               style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-              onPress={() => {
-                handleLogout()
-              }}
+              onPress={handleLogout}
             >
               <Ionicons name="log-out" size={24} color="#9ca3af" />
             </Pressable>
           ),
         }}
       />
-       <Tabs.Screen
+      <Tabs.Screen
         name="login"
         options={{
-           href: null,
+          href: null,
         }}
       />
     </Tabs>
